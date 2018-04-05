@@ -1,22 +1,13 @@
 import math as m
+from feature import feature
 
 
 def distance(x, y):
-    """
-    Simple Euclidean distance formula to get the distance between two points
-    :param x: array
-    :param y: array
-    :return: float
-    """
-    dist = 0
-    for i, j in zip(x, y):
-        dist += m.pow(i - j, 2)
-    return m.sqrt(dist)
+    # Simple Euclidean distance formula to get the distance between two points
+    return m.sqrt(sum([m.pow(i - j, 2) for i, j in zip(x, y)]))
 
 
-def read_file(file):
-    lines = []
-    for line in open(file).readlines():
-        lines.append(line.replace("\n", "").split(","))
+def get_feature_space(file):
+    lines = [line.replace("\n", "").split(",") for line in open(file).readlines()]
     lines.pop(0)
-    return [[float(i) for i in line] for line in lines]
+    return [feature(line) for line in [[float(i) for i in line] for line in lines]]

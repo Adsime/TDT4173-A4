@@ -21,18 +21,16 @@ def classify(features):
     winners = []
     # This loop is constructed to avoid same class always being chosen if there are equal contestants.
     for c in classes:
-        if len(winners) == 0:
+        if len(winners) == 0 or classes[winners[0]] == classes[c]:
             winners.append(c)
         elif classes[winners[0]] < classes[c]:
             winners[0] = c
-        elif classes[winners[0]] == classes[c]:
-            winners.append(c)
     # Chooses a random winner
     return random.choice(winners)
 
 
 def regression(features):
-    # Mean
+    # Mean value
     return sum([f.get_vote() for f in features]) / len(features)
 
 
