@@ -17,7 +17,7 @@ def classify(features):
     classes = defaultdict(int)
     # Count occurrences of each class in the feature set
     for f in features:
-        classes[f.get_vote()] += 1
+        classes[f.get_target()] += 1
     winners = []
     # This loop is constructed to avoid same class always being chosen if there are equal contestants.
     for c in classes:
@@ -31,7 +31,7 @@ def classify(features):
 
 def regression(features):
     # Mean value
-    return sum([f.get_vote() for f in features]) / len(features)
+    return sum([f.get_target() for f in features]) / len(features)
 
 
 def print_res(knn, estimate, sample, k, regression):
